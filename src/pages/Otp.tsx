@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/config";
+import toast from "react-hot-toast";
 
 const Otp = () => {
   const [code, setCode] = useState("");
@@ -17,7 +18,8 @@ const Otp = () => {
 
   const verifyOtp = async () => {
   if (code.length !== 6) {
-    alert("Please enter a valid 6-digit OTP");
+   toast.error("Please enter a valid 6-digit OTP");
+
     return;
   }
 
@@ -49,7 +51,8 @@ const Otp = () => {
     }
   } catch (error) {
     console.error("OTP verify error:", error);
-    alert("Invalid OTP. Please try again.");
+    toast.error("Invalid OTP. Please try again.");
+
   } finally {
     setLoading(false);
   }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "../firebase/config";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [phone, setPhone] = useState("");
@@ -9,7 +10,9 @@ const Login = () => {
 
  const sendOtp = async () => {
   if (phone.length !== 10) {
-    alert("Please enter a valid 10-digit phone number");
+   toast.error("Please enter a valid 10-digit phone number");
+
+
     return;
   }
 
@@ -69,7 +72,7 @@ const Login = () => {
 
           <button
             onClick={sendOtp}
-            className="w-full bg-indigo-600 text-white py-2 rounded"
+            className="w-full bg-indigo-600 text-white py-2 rounded cursor-pointer"
           >
             Get OTP
           </button>
